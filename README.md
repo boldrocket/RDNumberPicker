@@ -26,7 +26,7 @@ Additionally you can configure `RDNumberPicker` via IBInspectable attributes:
 - `unselectedColor`: Color for text labels which are not selected
 - `selectedColor`: Color for circular mask and text label when selected
 
-### via Code
+### Code
 
 An example usage:
 
@@ -40,6 +40,28 @@ numberPicker.selectedColor = [UIColor colorWithRed:250.0/255.0 green:134.0/255.0
 numberPicker.backgroundColor = [UIColor whiteColor];
 numberPicker.numberPickerDelegate = self;
 [self.view addSubview:numberPicker];
+```
+
+Callbacks can be handled from the protocol method:
+
+```objc
+- (void)numberPicker:(RDNumberPicker *)numberPicker didPickNumber:(NSInteger)value atIndex:(NSInteger)index;
+```
+
+The current control value can be accessed at any time using the property:
+
+```objc
+@property (nonatomic, assign, readonly) NSInteger currentValue;
+```
+
+Two convenience methods are provided to programmatically change the picker:
+
+```objc
+/* Programatically scroll to the number with associated value. If the value does not exist scrolling will not occur */
+- (void)highlightNumberWithValue:(NSInteger)value animated:(BOOL)animated;
+
+/* Programatically scroll to the number at a given index. If the index does not exist scrolling will not occur */
+- (void)highlightNumberAtIndex:(NSInteger)index animated:(BOOL)animated;
 ```
 
 ## Known Issues and Future Improvements
