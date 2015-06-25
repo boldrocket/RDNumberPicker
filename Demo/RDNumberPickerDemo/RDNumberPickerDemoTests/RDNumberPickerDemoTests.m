@@ -1,6 +1,6 @@
 //
-//  RDNumberPickerTests.m
-//  RDNumberPickerTests
+//  RDNumberPickerDemoTests.m
+//  RDNumberPickerDemoTests
 //
 //  Created by Ricky Dunn on 25/06/2015.
 //  Copyright (c) 2015 BoldRocket. All rights reserved.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface RDNumberPickerTests : XCTestCase
+@interface RDNumberPickerDemoTests : XCTestCase
 
 @end
 
-@implementation RDNumberPickerTests
+@implementation RDNumberPickerDemoTests
 
 - (void)setUp {
     [super setUp];
