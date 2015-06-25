@@ -1,6 +1,6 @@
 # RDNumberPicker
 
-A simple, usable, number picker, for selecting from a list of sequential numbers, inspired by the way which the Airbnb iOS app allows you to select number of guests.
+A simple, usable, number picker, for selecting from a list of sequential values, inspired by the way which the Airbnb iOS app allows you to select number of guests.
 
 Structurally it's a simple wrapper for a UICollectionView, providing some convenience.
 
