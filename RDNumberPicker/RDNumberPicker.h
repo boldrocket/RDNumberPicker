@@ -28,9 +28,6 @@ IB_DESIGNABLE
 /* Array of NSNumbers which represent the range of values to select from the picker */
 @property (nonatomic, copy) NSArray *numbersList;
 
-/* Circle mask for selectable area */
-@property (nonatomic, strong) UIView *maskView;
-
 /* Color for text labels when not selected */
 @property (nonatomic, strong) IBInspectable UIColor *unselectedColor;
  
@@ -47,7 +44,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable NSInteger defaultValue;
 
 /* The controls current value */
-@property (nonatomic, assign) NSInteger currentValue;
+@property (nonatomic, assign, readonly) NSInteger currentValue;
 
 /* Programatically scroll to the number with associated value. If the value does not exist scrolling will not occur */
 - (void)highlightNumberWithValue:(NSInteger)value animated:(BOOL)animated;

@@ -14,7 +14,9 @@ static CGFloat cellSize = 50.0f;
 
 @interface RDNumberPicker () <UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (nonatomic, assign, readwrite) NSInteger currentValue;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) UIView *maskView;
 
 @end
 
@@ -59,7 +61,9 @@ static CGFloat cellSize = 50.0f;
     [_collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     // Selection Mask (the round circle in the middle)
-    [self renderMask];
+    #if !TARGET_INTERFACE_BUILDER
+        [self renderMask];
+    #endif
     
     // Create the number objects and populate array
     [self initNumbersList];
@@ -69,12 +73,10 @@ static CGFloat cellSize = 50.0f;
 }
 
 - (void)initNumbersList
-{
-    NSAssert(self.minimumValue <= self.maximumValue, @"Invalid upper and lower values specified, please make sure upper value > lower value");
-    
+{    
     // Set a default upper value if none set by the user
-    if (!self.maximumValue) {
-        self.maximumValue = 100;
+    if (!_maximumValue) {
+        _maximumValue = 10;
     }
     
     NSMutableArray *arrayOfNumbers = [NSMutableArray array];
@@ -155,6 +157,38 @@ static CGFloat cellSize = 50.0f;
     return UIEdgeInsetsMake(0, inset, 0, inset);
 }
 
+#pragma mark - Setters
+- (void)setSelectedColor:(UIColor *)selectedColor
+{
+    _selectedColor = selectedColor;
+    self.maskView.layer.borderColor = selectedColor.CGColor;
+    [self.collectionView reloadData];
+}
+
+- (void)setUnselectedColor:(UIColor *)unselectedColor
+{
+    _unselectedColor = unselectedColor;
+    [self.collectionView reloadData];
+}
+
+- (void)setMinimumValue:(NSInteger)minimumValue
+{
+    _minimumValue = minimumValue;
+    [self initNumbersList];
+}
+
+- (void)setMaximumValue:(NSInteger)maximumValue
+{
+    _maximumValue = maximumValue;
+    [self initNumbersList];
+}
+
+- (void)setDefaultValue:(NSInteger)defaultValue
+{
+    _defaultValue = defaultValue;
+    [self highlightNumberWithValue:self.defaultValue animated:NO];
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
@@ -177,7 +211,7 @@ static CGFloat cellSize = 50.0f;
     CGFloat visibleWidth = layout.minimumInteritemSpacing + layout.itemSize.width;
     NSInteger page = floor((self.collectionView.contentOffset.x - visibleWidth / 2) / visibleWidth) + 1;
     
-    // As the user can potentially use bounce to drag a little further we need to make sure we're in bounds!
+    // As the user can potentially use bounce to drag a little further we need to make sure we're in bounds
     if (page != self.currentPage && page >= 0 && page < self.numbersList.count) {
         self.currentPage = page;
         self.currentValue = [self.numbersList[page] integerValue];
@@ -197,7 +231,6 @@ static CGFloat cellSize = 50.0f;
     label.textColor = self.selectedColor;
     label.text = @"1";
     [self addSubview:label];
-    
     [self renderMask];
 }
 
