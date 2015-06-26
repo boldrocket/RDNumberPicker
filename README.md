@@ -2,7 +2,7 @@
 
 A simple, usable, number picker, for selecting from a list of sequential values, inspired by the way which the Airbnb iOS app allows you to select number of guests.
 
-Structurally it's a simple wrapper for a UICollectionView, providing some convenience.
+Structurally it's a simple convenience wrapper for `UICollectionView`.
 
 <p align="center"><img src ="http://g.recordit.co/mm9rXiylDc.gif" /></p>
 
@@ -10,13 +10,13 @@ Structurally it's a simple wrapper for a UICollectionView, providing some conven
 
 To run the example project, clone the repo, and run the app from Xcode.
 
-`RDNumberPicker` can either be used from Interface builder, or from code, in both cases the scrollable area is the entirety of the frame, although the size of the cells, labels and mask remain fixed and vertically centred within the parent, at 50px in height.
+`RDNumberPicker` can either be used from `Interface Builder`, or from code, in both cases the scrollable area is the entirety of the frame, although the size of the cells, labels and mask remain fixed and vertically centred within the parent, at 50px in height.
 
 ### Interface Builder
 
-Drag a a UIView onto your view controller, change the class via `Identity Inspector` to `RDNumberPicker`. The view uses IB_DESIGNABLE so you should see where the ring mask will be placed, although not the associated values which you've configured.
+Drag a a UIView onto your view controller, change the class via `Identity Inspector` to `RDNumberPicker`. The view uses `IB_DESIGNABLE` so the ring mask will be shown in the centre of the view, although not the associated minimum and maximum values which may have been configured.
 
-Additionally you can configure `RDNumberPicker` via IBInspectable attributes:
+Additionally you can configure `RDNumberPicker` via `IBInspectable` attributes:
 
 <p align="center"><img src ="attributes.png" /></p>
 
@@ -66,10 +66,10 @@ Two convenience methods are provided to programmatically change the picker:
 
 ## Known Issues and Future Improvements
 
-- [ ] Strange rendering behaviour using IB_DESIGNABLE, `renderMask` explicitly called in `prepareForInterfaceBuilder` currently
+- [ ] Strange rendering behaviour using `IB_DESIGNABLE`, `renderMask` explicitly called in `prepareForInterfaceBuilder` to resolve
 - [ ] Configurable sizing, currently each cell is fixed at 50x50
-- [ ] Descending list of numbers to scroll through, if desired
-- [ ] Support for variable sized increments, not just 1
+- [ ] Configurable descending list of numbers to scroll through
+- [ ] Support for variable sized increments, not just ++
 - [ ] Tests!
 
 ## Author
